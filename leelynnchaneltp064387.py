@@ -5,7 +5,7 @@ import datetime
 from datetime import date
 
 def get_new_id(eid):
-    with open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/idgenerator.txt"), "r") as f:
+    with open("idgenerator.txt", "r") as f:
         line = f.readlines()  # reading one line
         rec = line[3].split("|")  # read one line in string form
     if eid == "AF":
@@ -37,7 +37,7 @@ def get_new_id(eid):
     mylist[ind] = nextid.center(25) 
     rec = '|'.join(mylist)   # join can convert list back into string, joining new id with old record
     line[3] = rec
-    with open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/idgenerator.txt"), "w") as fh:
+    with open("idgenerator.txt", "w") as fh:
         fh.writelines(line)
     return nextid
 
@@ -133,7 +133,7 @@ def new_registration():
                 print('Wrong input, please try again.')
                 continue
             vacdate = str(vaccinedate) + " " + x # here i concacinate 2 strings
-            with open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/id.txt"), "r") as fh:
+            with open("id.txt"), "r") as fh:
                 storedate = []
                 index = 3
                 line = fh.readlines()
@@ -154,7 +154,7 @@ def new_registration():
                 continue
             else:
                 break
-        with open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/id.txt"), "r") as fh:
+        with open("id.txt", "r") as fh:
             readline = fh.readlines()
             infoline = readline[len(readline) - 2].rstrip().split(
                 "|")  # reading 4th last line of text file and stripping whitespace from 3rd line of txt file
@@ -162,7 +162,7 @@ def new_registration():
             infoline[4] = date  # have to fill up the 5th columns of txt file
             joins = '|'.join(infoline) +('\n') # join everything together
             readline[len(readline) - 2] = joins
-            with open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/id.txt"), "w") as fh:
+            with open("id.txt"), "w") as fh:
                 fh.writelines(readline)
         print("Registration completed. Thank you for your patience and time.\n Please ensure that you will show up on", vaccinedate, "at", x,"for your first dosage of vaccination.")
         print("="*(140))
@@ -250,7 +250,7 @@ def new_registration():
             vacid = get_new_id("CZ")
             id = "CZVAC"
         print("Your patient ID is:", vacid)
-        with open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/vaccination.txt"), "r") as fh, open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/id.txt"), "r" )as f:
+        with open("vaccination.txt", "r") as fh, open("id.txt"), "r" )as f:
             readline = fh.readlines() # for vaccination.txt
             readline2 = f.readlines() # for id.txt
             seclastline = readline[len(readline)-2].rstrip().split("|") #reading 2nd last line of text file and stripping whitespace from 3rd line of txt file
@@ -263,7 +263,7 @@ def new_registration():
             seclastline[6] = vaccineid
             join = '|'.join(seclastline) +('\n')    # join everything together
             readline[len(readline) - 2] = join
-            with open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/vaccination.txt"), "w") as fh, open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/id.txt"), "w") as f:
+            with open("vaccination.txt", "w") as fh, open("id.txt", "w") as f:
                 fh.writelines(readline)
                 seclastline2[2] = patientid.center(20)
                 join = ('|').join(seclastline2) +('\n')
@@ -461,7 +461,7 @@ def new_registration():
         elif age >= 45 and age <= 160:
             vccentre = "KL VC centre"
 
-        with open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/vaccination.txt"), "a") as fh:
+        with open("vaccination.txt", "a") as fh:
             rec = []
             rec.append([newpatient, patientid, newcontact, newbirth, newic, newemail, vaccinecode,  status, vccentre])
             for i in range(len(rec)):
@@ -470,7 +470,7 @@ def new_registration():
                                   + rec[i][6].center(20) + "|" + rec[i][7].center(20) + "|" + rec[i][8].center(20) + "|")
             fh.write(patientlist + "\n" + "-" * 204 + "\n")
 
-        with open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/id.txt"), "a") as fh:
+        with open("id.txt", "a") as fh:
             rec = []
             rec.append([newpatient, str(currentdate), patientid, status, " "*30, " "*30, vccentre])
             #print(rec)
@@ -550,7 +550,7 @@ def vaccine_admin():
             password = staff_password()
             print("Your staff ID:", staffid, "\nYour password is:", password, "\nYou will need your staff ID and password to login the adminsitration "
             "system.")
-            with open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/staffdata.txt"), "a") as fh:
+            with open("staffdata.txt", "a") as fh:
                 rec = []
                 rec.append([staffid, newstaff, currentdate, password])
                 print(rec)
@@ -568,7 +568,7 @@ def vaccine_admin():
     def login():
         def loginid():
             id = input("Please enter your staff ID:")
-            with open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/staffdata.txt"), "r") as fh:
+            with open("staffdata.txt", "r") as fh:
                 store = []
                 index = 3
                 line = fh.readlines()
@@ -603,7 +603,7 @@ def vaccine_admin():
             while True:
                 staffpass = input("Please enter your password:")
                 validpass = id + staffpass
-                with open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/staffdata.txt"), "r") as fh:
+                with open("staffdata.txt", "r") as fh:
                     store = []
                     index = 3
                     line = fh.readlines()
@@ -741,25 +741,25 @@ def vaccine_admin():
             else:
                 print("Wrong input, please try again.")
                 continue
-        with open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/id.txt"), "r") as fh:
+        with open("id.txt", "r") as fh:
             readline = fh.readlines()
             linenum = readline[line].rstrip().split('|') #specific line of the textfile
             linenum[column] = new_value #replace specific column in a line with 'new_value' variable
             join = '|'.join(linenum)+'\n' #joining | 
             readline[line] = join #specific line in a text file
-            with open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/id.txt"), "w") as fh:
+            with open("id.txt", "w") as fh:
                 fh.writelines((readline))
         if field == '3' or field == '4':
              admin_patientsmenu()
         else:
-            with open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/vaccination.txt"), "r") as f:
+            with open("vaccination.txt", "r") as f:
                 readline = f.readlines()
                 linenum = readline[line].rstrip().split('|') #specific line of the textfile
                 new_value = new_value
                 linenum[column2] = new_value #replace specific column in a line with 'new_value' variable
                 join = '|'.join(linenum)+'\n' #joining | 
                 readline[line] = join #specific line in a text file
-                with open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/vaccination.txt"), "w") as fh:
+                with open("vaccination.txt", "w") as fh:
                     fh.writelines((readline))
         admin_patientsmenu()
 
@@ -768,7 +768,7 @@ def vaccine_admin():
         delta = datetime.timedelta(days=14) 
         delta2 = datetime.timedelta(days=21) 
         delta3 = datetime.timedelta(days=28) 
-        with open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/id.txt"), "r") as fh:
+        with open("id.txt", "r") as fh:
             rec = []
             readline = fh.readlines()
             rec.append(readline[linenum].strip().split('|'))
@@ -820,7 +820,7 @@ def vaccine_admin():
             break
                     
         if dose == '1':
-            with open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/id.txt"), "r") as f:
+            with open("id.txt", "r") as f:
                 readline = f.readlines()
                 line = readline[linenum].rstrip().split('|') #specific line of the textfile in accordance with the patient id given
                 status = "COMPLETED-D1".center(20)
@@ -839,19 +839,19 @@ def vaccine_admin():
                 line[5] = str(dose2date).center(30) #replace 6th column in a line with 'dose2date' variable
                 join = '|'.join(line)+'\n' #joining | 
                 readline[linenum] = join #specific line in a text file
-                with open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/id.txt"), "w") as f:
+                with open("id.txt", "w") as f:
                     f.writelines((readline))
-            with open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/vaccination.txt"), "r") as fh:
+            with open("vaccination.txt", "r") as fh:
                 readline = fh.readlines()
                 line = readline[linenum].rstrip().split('|') #specific line of the textfile in accordance with the patient id given
                 line[7] = status.center(20)
                 join = '|'.join(line)+'\n' #joining | 
                 readline[linenum] = join #specific line in a text file
-                with open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/vaccination.txt"), "w") as fh:
+                with open("vaccination.txt", "w") as fh:
                     fh.writelines((readline))
             return admin_patientsmenu()
         elif dose == '2':
-            with open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/id.txt"), "r") as f, open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/vaccination.txt"), "r") as fh:
+            with open(id.txt", "r") as f, open("vaccination.txt", "r") as fh:
                 readline = f.readlines()
                 readline2 = fh.readlines()
                 line = readline[linenum].rstrip().split('|') #specific line of the textfile in accordance with the patient id given
@@ -863,16 +863,16 @@ def vaccine_admin():
                 join2 = '|'.join(line2)+'\n' #joining | 
                 readline[linenum] = join #specific line in a text file
                 readline2[linenum] = join2
-                with open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/id.txt"), "w") as f:
+                with open("id.txt", "w") as f:
                     f.writelines((readline))
-                with open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/vaccination.txt"), "w") as fh:
+                with open("vaccination.txt", "w") as fh:
                     fh.writelines((readline2))
             return admin_patientsmenu()
 
     def management():
         while True:
             search = input("Please enter patient ID:")
-            with open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/id.txt"), "r") as fh:
+            with open("id.txt", "r") as fh:
                 line = fh.readlines()
                 store = []
                 index = 3
@@ -913,7 +913,7 @@ def vaccine_admin():
                         continue
                     
     def all_patients():
-        with open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/id.txt"), "r") as fh:
+        with open("id.txt", "r") as fh:
             line = fh.readlines()
             for index in line:
                 print(index)
@@ -924,7 +924,7 @@ def vaccine_admin():
         return admin_patientsmenu()
 
     def statistic():
-        with open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/idgenerator.txt"), "r") as fh:
+        with open("idgenerator.txt", "r") as fh:
             rec = []
             line = fh.readlines()
             rec.append(line[3].rstrip().split('|'))
@@ -935,7 +935,7 @@ def vaccine_admin():
             ec = rec[0][4].strip()
             statistic = "Number of patients with AV vaccination:" + str(int(af[2:])) + "\nNumber of patients with BV vaccination:" + str(int(bv[2:]))  + "\nNumber of patients with CZ vaccination:" + str(int(cz[2:]))  + "\nNumber of patients with DM vaccination:" + str(int(dm[2:]))  + "\nNumber of patients with EC vaccination:" + str(int(ec[2:]))
             print(statistic)
-        with open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/id.txt"), "r") as fh:
+        with open("id.txt", "r") as fh:
             line = fh.readlines()
             list = []
             index = 3
@@ -984,7 +984,7 @@ def vaccine_admin():
 def id_check(id):
     while True:
             search = input(id)
-            with open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/id.txt"), "r") as fh:
+            with open("id.txt", "r") as fh:
                 line = fh.readlines()
                 store = []
                 index = 3
@@ -1018,7 +1018,7 @@ def id_check(id):
 
 def record():
     search = id_check("Please enter patient ID:")
-    with open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/id.txt"), "r") as fh:
+    with open("id.txt", "r") as fh:
         line = fh.readlines()
         store = []
         store.append(line[int(search)].split("|"))
@@ -1064,7 +1064,7 @@ def menu():
             continue
 
 def write_txtfile():
-    with open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/vaccination.txt"), "w") as fh:
+    with open("vaccination.txt", "w") as fh:
         intro = str(
             "=" * 204 + "\n" + "Name".center(20) + "|" + "Patient ID".center(20) + "|" + "Contact Number".center(20) +
             "|" + "Date of birth".center(20) + "|" + "IC number".center(20) + "|"
@@ -1072,14 +1072,14 @@ def write_txtfile():
             "|" + "Status".center(20) + "|" + "VC Centre".center(20) + "|"+ "\n" + "=" * 204)
         fh.write(intro + "\n")
 
-    with open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/id.txt"), "w") as fh:
+    with open("id.txt", "w") as fh:
         intro = str(
             "=" * 168 + "\n" + "Name".center(20) + "|" + "Registration date".center(20) + "|" + "Patient ID".center(
                 20) + "|" + "Status".center(
                 20) + "|" + "First Doze Date and time".center(30) + "|" + "Second Doze Date and time".center(30) + "|" + "VC Centre".center(20) + "|" + "\n" + "=" * 168)
         fh.write(intro + "\n")
 
-    with open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/idgenerator.txt"), "w") as fh:
+    with open("idgenerator.txt", "w") as fh:
         intro = str(
             "=" * 156 + "\n" + "AF vaccine".center(25) + "|" + "BV vaccine".center(25) + "|" + "CZ vaccine".center(
                 25) + "|" + "DM vaccine".center(
@@ -1090,7 +1090,7 @@ def write_txtfile():
                     "-" * 156)
         fh.write(slot1 + "\n")
 
-    with open(os.path.expanduser("/Users/leelynnchanel/Desktop/pythonassignment/staffdata.txt"), "w") as fh:
+    with open("staffdata.txt", "w") as fh:
         intro = str(
             "=" * 104 + "\n" + "Staff ID".center(25) + "|" + "Name".center(25) + "|" + "Registration date".center(
                 25) + "|" + "Password".center(25) + "|" + "\n" + "=" * 104)
